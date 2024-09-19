@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from "react";
 import styles from "./search.module.css";
 
-const URL = "https://api.spoonacular.com/recipes/complexSearch";
-const API_KEY = "1e8fed6ff02647eaa02b5f4bcd967fbf";
-
 export default function Search({ foodData, setFoodData }) {
-  const [query, setQuery] = useState("pizza");
-
+  const [query, setQuery] = useState("curry");
+  const URL = `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`;
   // useEffect to call API when query changes
   useEffect(() => {
     async function fetchFood() {
-      const res = await fetch(`${URL}?query=${query}&apiKey=${API_KEY}`);
+      const res = await fetch(URL);
       const data = await res.json();
-      setFoodData(data.results);
-      console.log(data.results);
+      setFoodData(data.meals);
     }
     fetchFood();
   }, [query]);
