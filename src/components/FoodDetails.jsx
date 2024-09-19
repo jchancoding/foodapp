@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import styles from "./fooddetails.module.css";
 
 export default function FoodDetails({ foodId }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -45,39 +46,43 @@ export default function FoodDetails({ foodId }) {
 
   return (
     <div>
-      <div>
-        <h1>{foodData.strMeal}</h1>
-        <img src={foodData.strMealThumb} alt="" />
-      </div>
-      <div>
-        <span>
-          <strong>🌎Cuisine: {foodData.strArea}</strong>
-        </span>
-        <span>
-          <strong>🍽️Category: {foodData.strCategory}</strong>
-        </span>
-        <span>
-          <strong>🌿Number of Ingredients: {ingredientCount}</strong>
-        </span>
-      </div>
-      <div>
-        <span>
-          <strong>
-            Source: <a href={foodData.strSource}>{foodData.strSource}</a>
-          </strong>
-        </span>
-      </div>
-      <div>
+      <div className={styles.recipeCard}>
+        <h1 className={styles.recipeName}>{foodData.strMeal}</h1>
+        <img
+          className={styles.recipeImage}
+          src={foodData.strMealThumb}
+          alt=""
+        />
+        <div className={styles.recipeDetails}>
+          <span>
+            <strong>🌎Area:{foodData.strArea}</strong>
+          </span>
+          <span>
+            <strong>🍽️Type:{foodData.strCategory}</strong>
+          </span>
+          <span>
+            <strong>🌿Ingredients:{ingredientCount}</strong>
+          </span>
+        </div>
+        <div>
+          <span>
+            <strong>
+              Source: <a href={foodData.strSource}>{foodData.strSource}</a>
+            </strong>
+          </span>
+        </div>
         <h2>Cooking Instructions</h2>
-        {isLoading ? (
-          <h3>Loading...</h3>
-        ) : (
-          <ol>
-            {instructions.map((instruction, index) => (
-              <li key={index}>{instruction}</li>
-            ))}
-          </ol>
-        )}
+        <div className={styles.recipeInstructions}>
+          {isLoading ? (
+            <h3>Loading...</h3>
+          ) : (
+            <ol>
+              {instructions.map((instruction, index) => (
+                <li key={index}>{instruction}</li>
+              ))}
+            </ol>
+          )}
+        </div>
       </div>
     </div>
   );
