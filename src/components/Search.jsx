@@ -16,6 +16,7 @@ export default function Search({ foodData, setFoodData }) {
 
   return (
     <div className={styles.searchContainer}>
+      <h2>Search By Name</h2>
       <input
         className={styles.searchInput}
         value={query}

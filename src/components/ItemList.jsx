@@ -42,7 +42,7 @@ export default function ItemList({
         <ul>
           {ingredients.map(({ ingredient, measure }, index) => (
             <li key={index}>
-              {measure} {ingredient}
+              {measure} <strong>{ingredient}</strong>
             </li>
           ))}
         </ul>
