@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styles from "./fooddetails.module.css";
+import ItemList from "./ItemList";
 
 export default function FoodDetails({ foodId }) {
   const [isLoading, setIsLoading] = useState(true);
   const [foodData, setFoodData] = useState({});
   const [ingredientCount, setIngredientCount] = useState(0);
+  const [ingredients, setIngredients] = useState([]);
   const [instructions, setInstructions] = useState([]);
   const URL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${foodId}`;
 
@@ -31,6 +33,7 @@ export default function FoodDetails({ foodId }) {
       };
       setIngredientCount(countIngredients());
 
+      // Format instructions that aren't empty strings
       const formatInstructions = () => {
         if (foodData.strInstructions) {
           return foodData.strInstructions
@@ -71,6 +74,13 @@ export default function FoodDetails({ foodId }) {
             </strong>
           </span>
         </div>
+        <h2>Ingredients</h2>
+        <ItemList
+          isLoading={isLoading}
+          foodData={foodData}
+          ingredients={ingredients}
+          setIngredients={setIngredients}
+        />
         <h2>Cooking Instructions</h2>
         <div className={styles.recipeInstructions}>
           {isLoading ? (
